@@ -1,6 +1,8 @@
 const express = require("express");
 const helmet = require("helmet");
 
+const db = require("../data/configureDB");
+
 const server = express();
 
 server.use(helmet());
@@ -17,7 +19,7 @@ server.get("/api/cars", (req, res) => {
       res.status(200).json(response);
     })
     .catch(() => {
-      res.status(500).json({ errorMessage: "Error with getting cars." });
+      res.status(500).json({ error: "Error with fetching cars." });
     });
 });
 
@@ -32,7 +34,7 @@ server.post("/api/cars", (req, res) => {
         });
     })
     .catch((error) => {
-      res.status(500).json({ errorMessage: "Error with creating car." });
+      res.status(500).json({ error: "Error with creating car." });
     });
 });
 
